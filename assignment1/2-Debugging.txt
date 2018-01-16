@@ -1,0 +1,37 @@
+Part Two: Fixing the Bugs
+-------------------------
+
+Understanding the code
+
+  1) Explain why this program uses the exclamation operator with the
+     strcmp() function.
+   -> The exclamation operator is a not operator. Since strcmp() returns 0 
+      if the strings are equal, we must invert the 0 into 1 to make the if 
+      statement true.
+
+  2) Explain why the 'LENGTH' macro returns the length of an array.
+     Would it work with a pointer to a dynamically allocated array? (Hint:
+     understand sizeof).
+   -> LENGTH returns the length of an array by taking the size of an array
+      in bytes and dividing it by the size of the element type in bytes.
+
+Bug hunting
+
+  3) Explain and fix the logical flow bug within the switch statement.
+     (What happens when the -h option is used?)
+   -> The logical error is that there is no break or exit after the first case.
+      Before fixing the issue using -h will call printHelp and will print
+      that the argument is invalid.
+
+  4) Explain and fix the argument parsing error. (Why is entrycount never
+     zero?)
+   -> entrycount is never 0 because entryCount++ is always executed in the if
+      statement that checks entryCount < LENGTH(entries) and entries is
+      defined with a size of 5. entries should be defined with a size of argc - 1.
+
+  5) Fix print_result() to print results correctly and in the same order
+     as the words were specified on the command line.  Explain your solution.
+   -> The function originally dereferenced the first element of the entries array.
+      I changed it to loop through the array and made the index start at i = 0 and loop
+      until i < entry_count to have the proper direction.
+
